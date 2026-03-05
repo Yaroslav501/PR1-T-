@@ -1,18 +1,15 @@
 class DataBase:
     def __init__(self, db_name):
         self.db_name = db_name
-        # Таблица сотрудников
         self.employees = {
             1: ["SN001", "Петров", "Инспектор", 1],
             2: ["SN002", "Сидоров", "Руководитель", 2]
         }
-        # Таблица объектов
         self.railway_objects = {
             1: ["station", "Станция Новосибирск", "км 10", 1],
             2: ["crossing", "Переезд №45", "км 25", 1],
             3: ["section", "Перегон А-Б", "км 30-40", 1]
         }
-        # Таблица инцидентов
         self.incidents = {
             1: ["15.02.2025", 2, "Нарушение", "Проезд на запрещающий сигнал", "Открыт", 1]
         }
@@ -53,9 +50,9 @@ class SafetyManagement:
     def view_all_incidents(self, user_id, access_level):
         if user_id in self.db.employees:
             all_incidents = self.db.get_all_incidents()
-            if access_level == 1:  # Инспектор видит только свои
+            if access_level == 1:
                 return {k: v for k, v in all_incidents.items() if v[5] == user_id}
-            return all_incidents  # Руководитель видит все
+            return all_incidents
         else:
             return "Пользователь не найден"
 
